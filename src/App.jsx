@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./index.css"; // THIS LINE IS REQUIRED
+import "./index.css"; // CRITICAL: This must be here
 import Cube from "./ThreeJsSetup/Cube";
 import TexturedCube from "./ThreeJsSetup/TexturedCube";
 
@@ -8,6 +8,7 @@ function App() {
 
   return (
     <div className="app-layout">
+      {/* LEFT SIDEBAR MENU */}
       <aside className="sidebar">
         <div className="identity-header">
           <h1>Student ID: B23110006135</h1>
@@ -32,9 +33,12 @@ function App() {
         </nav>
       </aside>
 
+      {/* RIGHT DISPLAY STAGE */}
       <main className="main-stage">
-        {view === "cube" && <Cube />}
-        {view === "textured" && <TexturedCube />}
+        <div id="canvas-container">
+          {view === "cube" && <Cube />}
+          {view === "textured" && <TexturedCube />}
+        </div>
       </main>
     </div>
   );
