@@ -6,21 +6,43 @@ function App() {
   const [view, setView] = useState("cube");
 
   return (
-    <div style={{ textAlign: "center" }}>
-      {/* Updated Name and Placeholder for Seat Number */}
-      <h2>Name: Omer Sohail | Seat No: [B23110006135]</h2>
+    // This wrapper handles the new Flexbox layout
+    <div className="app-layout">
       
-      <div style={{ marginBottom: "20px" }}>
-        <button onClick={() => setView("cube")}>
-          Simple Cube
-        </button>
-        <button onClick={() => setView("textured")}>
-          Textured Cube
-        </button>
-      </div>
-      
-      {view === "cube" && <Cube />}
-      {view === "textured" && <TexturedCube />}
+      {/* LEFT SIDEBAR MENU */}
+      <aside className="sidebar">
+        
+        {/* Updated Identity Header (Branding) */}
+        <div className="identity-header">
+          <h1>Student ID: B23110006135</h1>
+          <p>Omer Sohail</p>
+          <p>UBIT Karachi</p>
+        </div>
+        
+        {/* Navigation Pane */}
+        <nav className="control-pane">
+          <button 
+            className="control-btn btn-simple" 
+            onClick={() => setView("cube")}
+          >
+            VIRTUAL CUBE (PURPLE)
+          </button>
+          
+          <button 
+            className="control-btn btn-textured" 
+            onClick={() => setView("textured")}
+          >
+            TEXTURED CUBE (GOLD)
+          </button>
+        </nav>
+      </aside>
+
+      {/* RIGHT DISPLAY STAGE */}
+      <main className="main-stage">
+        {view === "cube" && <Cube />}
+        {view === "textured" && <TexturedCube />}
+      </main>
+
     </div>
   );
 }
