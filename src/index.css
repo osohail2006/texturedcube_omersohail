@@ -1,32 +1,31 @@
 /* General Page Styling */
-body {
+html, body, #root {
   margin: 0;
   padding: 0;
-  background-color: #0d1117; /* Deep Midnight Blue/Black */
-  color: #c9d1d9; /* Off-White for text */
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  display: flex; /* Key for the two-column layout */
-  height: 100vh;
-  overflow: hidden; /* Prevents scrollbars */
+  width: 100%;
+  height: 100%;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
-/* THE SIDEBAR (LEFT MENU) */
 .app-layout {
   display: flex;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .sidebar {
   width: 300px;
-  background-color: #161b22; /* Slightly Lighter Black/Grey */
-  border-right: 2px solid #30363d; /* Dark border */
+  background-color: #161b22;
+  border-right: 2px solid #30363d;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  box-sizing: border-box;
+  flex-shrink: 0; /* Prevents sidebar from squishing */
 }
 
-/* Branding/Identity Header in Sidebar */
 .identity-header {
   border-bottom: 2px solid #30363d;
   padding-bottom: 20px;
@@ -36,24 +35,15 @@ body {
 .identity-header h1 {
   font-size: 1.1rem;
   margin: 0;
-  color: #58a6ff; /* Cyan Blue */
-  letter-spacing: 0.5px;
+  color: #58a6ff;
 }
 
-.identity-header p {
-  font-size: 0.85rem;
-  color: #8b949e; /* Muted grey */
-  margin: 8px 0 0 0;
-}
-
-/* Control Buttons Section */
 .control-pane {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Spacing between buttons */
+  gap: 15px;
 }
 
-/* New, unique button styling with neon effects */
 .control-btn {
   padding: 14px 20px;
   font-size: 0.95rem;
@@ -62,42 +52,28 @@ body {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-align: left;
-  letter-spacing: 0.5px;
 }
 
-/* Color Scheme: Simple Cube (Purple) */
 .btn-simple {
-  background-color: #6f42c1; /* Modern Purple */
+  background-color: #6f42c1;
   color: white;
-  border-color: #6f42c1;
 }
 
-.btn-simple:hover {
-  background-color: rgba(111, 66, 193, 0.2); /* Transparent Purple */
-  border-color: #6f42c1;
-  box-shadow: 0 0 15px rgba(111, 66, 193, 0.4); /* Glow effect */
-}
-
-/* Color Scheme: Textured Cube (Gold/Yellow) */
 .btn-textured {
-  background-color: #e3b341; /* Deep Gold/Yellow */
-  color: #0d1117; /* Dark text for contrast */
-  border-color: #e3b341;
+  background-color: #e3b341;
+  color: #0d1117;
 }
 
-.btn-textured:hover {
-  background-color: rgba(227, 179, 65, 0.1);
-  color: #e3b341;
-  border-color: #e3b341;
-  box-shadow: 0 0 15px rgba(227, 179, 65, 0.4); /* Glow effect */
-}
-
-/* THE MAIN DISPLAY AREA (RIGHT CUBE SPACE) */
 .main-stage {
-  flex-grow: 1; /* Fills remaining space */
+  flex-grow: 1;
+  background-color: #0a0e12;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0a0e12; /* Slightly Darker stage */
+}
+
+/* Ensures Three.js canvas fills the area */
+#canvas-container canvas {
+  display: block;
 }
