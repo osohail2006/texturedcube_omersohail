@@ -6,8 +6,6 @@ function TexturedCube() {
 
   useEffect(() => {
     const scene = new THREE.Scene();
-    
-    // Adjusting camera for a better view of the 3x3x3 cube
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -17,21 +15,21 @@ function TexturedCube() {
     
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    // Setting a background color that makes the cube pop
     renderer.setClearColor(0x242424); 
     mountRef.current.appendChild(renderer.domElement);
 
     const loader = new THREE.TextureLoader();
 
-    // Mapping your 6 images to the cube faces
-    // Order: Right, Left, Top, Bottom, Front, Back
+    // VITE FIX: This dynamically gets the correct path for GitHub Pages
+    const basePath = import.meta.env.BASE_URL;
+
     const materials = [
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image1.jpeg") }),
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image2.jpeg") }),
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image3.jpeg") }),
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image4.jpeg") }),
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image5.png") }),
-      new THREE.MeshBasicMaterial({ map: loader.load("/textures/image6.png") }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image1.jpeg`) }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image2.jpeg`) }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image3.jpeg`) }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image4.jpeg`) }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image5.png`) }),
+      new THREE.MeshBasicMaterial({ map: loader.load(`${basePath}textures/image6.png`) }),
     ];
 
     const cube = new THREE.Mesh(
@@ -40,12 +38,10 @@ function TexturedCube() {
     );
 
     scene.add(cube);
-
     camera.position.z = 6;
 
     const animate = () => {
       requestAnimationFrame(animate);
-      // Continuous rotation
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
       renderer.render(scene, camera);
@@ -53,7 +49,6 @@ function TexturedCube() {
     
     animate();
 
-    // Clean up on unmount
     return () => {
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
